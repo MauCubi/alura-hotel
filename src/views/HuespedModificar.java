@@ -1,37 +1,34 @@
 package views;
 
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.SystemColor;
+import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.text.Format;
+
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JSeparator;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import controller.HuespedController;
 import modelo.Huesped;
 
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import java.awt.Font;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-import java.text.Format;
-import java.awt.event.ActionEvent;
-import java.awt.Toolkit;
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
-
-@SuppressWarnings("serial")
-public class RegistroHuesped extends JFrame {
+public class HuespedModificar extends JFrame{
 
 	private JPanel contentPane;
 	private JTextField txtNombre;
@@ -48,25 +45,25 @@ public class RegistroHuesped extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegistroHuesped frame = new RegistroHuesped(2);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					HuespedModificar frame = new HuespedModificar(2);
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public RegistroHuesped(int idReserva) {
+	public HuespedModificar(Huesped huesped) {
 		
-		setIconImage(Toolkit.getDefaultToolkit().getImage(RegistroHuesped.class.getResource("/imagenes/lOGO-50PX.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HuespedModificar.class.getResource("/imagenes/lOGO-50PX.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 910, 634);
 		contentPane = new JPanel();
@@ -168,6 +165,7 @@ public class RegistroHuesped extends JFrame {
 		txtNombre.setColumns(10);
 		txtNombre.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		contentPane.add(txtNombre);
+		txtNombre.setText(huesped.getNombre());
 		
 		txtApellido = new JTextField();
 		txtApellido.setFont(new Font("Roboto", Font.PLAIN, 16));
@@ -176,6 +174,7 @@ public class RegistroHuesped extends JFrame {
 		txtApellido.setBackground(Color.WHITE);
 		txtApellido.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		contentPane.add(txtApellido);
+		txtApellido.setText(huesped.getApellido());
 		
 		txtFechaN = new JDateChooser();
 		txtFechaN.setFont(new Font("Dialog", Font.PLAIN, 16));
@@ -186,10 +185,11 @@ public class RegistroHuesped extends JFrame {
 		editor.setForeground(Color.BLACK);
 		
 		txtFechaN.setBounds(560, 278, 285, 36);
-		txtFechaN.getCalendarButton().setIcon(new ImageIcon(RegistroHuesped.class.getResource("/imagenes/icon-reservas.png")));
+		txtFechaN.getCalendarButton().setIcon(new ImageIcon(HuespedModificar.class.getResource("/imagenes/icon-reservas.png")));
 		txtFechaN.getCalendarButton().setBackground(SystemColor.textHighlight);
 		txtFechaN.setDateFormatString("yyyy-MM-dd");
 		contentPane.add(txtFechaN);
+		txtFechaN.setDate(huesped.getFechaNacimiento());
 		
 		txtNacionalidad = new JComboBox();
 		txtNacionalidad.setBounds(560, 350, 289, 36);
@@ -197,6 +197,15 @@ public class RegistroHuesped extends JFrame {
 		txtNacionalidad.setFont(new Font("Roboto", Font.PLAIN, 16));
 		txtNacionalidad.setModel(new DefaultComboBoxModel(new String[] {"afgano-afgana", "alemán-", "alemana", "árabe-árabe", "argentino-argentina", "australiano-australiana", "belga-belga", "boliviano-boliviana", "brasileño-brasileña", "camboyano-camboyana", "canadiense-canadiense", "chileno-chilena", "chino-china", "colombiano-colombiana", "coreano-coreana", "costarricense-costarricense", "cubano-cubana", "danés-danesa", "ecuatoriano-ecuatoriana", "egipcio-egipcia", "salvadoreño-salvadoreña", "escocés-escocesa", "español-española", "estadounidense-estadounidense", "estonio-estonia", "etiope-etiope", "filipino-filipina", "finlandés-finlandesa", "francés-francesa", "galés-galesa", "griego-griega", "guatemalteco-guatemalteca", "haitiano-haitiana", "holandés-holandesa", "hondureño-hondureña", "indonés-indonesa", "inglés-inglesa", "iraquí-iraquí", "iraní-iraní", "irlandés-irlandesa", "israelí-israelí", "italiano-italiana", "japonés-japonesa", "jordano-jordana", "laosiano-laosiana", "letón-letona", "letonés-letonesa", "malayo-malaya", "marroquí-marroquí", "mexicano-mexicana", "nicaragüense-nicaragüense", "noruego-noruega", "neozelandés-neozelandesa", "panameño-panameña", "paraguayo-paraguaya", "peruano-peruana", "polaco-polaca", "portugués-portuguesa", "puertorriqueño-puertorriqueño", "dominicano-dominicana", "rumano-rumana", "ruso-rusa", "sueco-sueca", "suizo-suiza", "tailandés-tailandesa", "taiwanes-taiwanesa", "turco-turca", "ucraniano-ucraniana", "uruguayo-uruguaya", "venezolano-venezolana", "vietnamita-vietnamita"}));
 		contentPane.add(txtNacionalidad);
+		
+		int itemCount = txtNacionalidad.getItemCount();
+		
+		for (int i = 0; i < itemCount; i++) {
+			if (String.valueOf(txtNacionalidad.getItemAt(i)).equals(huesped.getNacionalidad())) {
+				txtNacionalidad.setSelectedIndex(i);
+				break;
+			}
+		}
 		
 		JLabel lblNombre = new JLabel("NOMBRE");
 		lblNombre.setBounds(562, 119, 253, 14);
@@ -235,6 +244,7 @@ public class RegistroHuesped extends JFrame {
 		txtTelefono.setBackground(Color.WHITE);
 		txtTelefono.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		contentPane.add(txtTelefono);
+		txtTelefono.setText(huesped.getTelefono());
 		
 		JLabel lblTitulo = new JLabel("REGISTRO HUÉSPED");
 		lblTitulo.setBounds(606, 55, 234, 42);
@@ -254,7 +264,7 @@ public class RegistroHuesped extends JFrame {
 		txtNreserva.setColumns(10);
 		txtNreserva.setBackground(Color.WHITE);
 		txtNreserva.setBorder(javax.swing.BorderFactory.createEmptyBorder());
-		txtNreserva.setText(String.valueOf(idReserva));
+		txtNreserva.setText(String.valueOf(huesped.getIdReserva()));
 		contentPane.add(txtNreserva);
 		
 		JSeparator separator_1_2 = new JSeparator();
@@ -300,9 +310,19 @@ public class RegistroHuesped extends JFrame {
 			public void mouseClicked(MouseEvent e) {			
 				
 				if (txtNombre.getText() != null && txtApellido.getText() != null && txtFechaN.getDate() != null	&& txtTelefono != null) {
-					guardarHuesped();
-					Exito exito = new Exito();
-					exito.setVisible(true);
+					String fechaN = ((JTextField)txtFechaN.getDateEditor().getUiComponent()).getText();
+					
+					huespedController.actualizarHuesped(huesped.getId(), 
+														txtNombre.getText(), 
+														txtApellido.getText(),
+														java.sql.Date.valueOf(fechaN), 
+														txtNacionalidad.getSelectedItem().toString(), 
+														txtTelefono.getText(), 
+														huesped.getIdReserva());
+					
+					JOptionPane.showMessageDialog(null, "Huesped Modificado");
+					Busqueda busqueda = new Busqueda();
+					busqueda.setVisible(true);
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Debes llenar todos los campos.");
@@ -331,12 +351,12 @@ public class RegistroHuesped extends JFrame {
 		JLabel imagenFondo = new JLabel("");
 		imagenFondo.setBounds(0, 121, 479, 502);
 		panel.add(imagenFondo);
-		imagenFondo.setIcon(new ImageIcon(RegistroHuesped.class.getResource("/imagenes/registro.png")));
+		imagenFondo.setIcon(new ImageIcon(HuespedModificar.class.getResource("/imagenes/registro.png")));
 		
 		JLabel logo = new JLabel("");
 		logo.setBounds(194, 39, 104, 107);
 		panel.add(logo);
-		logo.setIcon(new ImageIcon(RegistroHuesped.class.getResource("/imagenes/Ha-100px.png")));
+		logo.setIcon(new ImageIcon(HuespedModificar.class.getResource("/imagenes/Ha-100px.png")));
 	}
 	
 	
@@ -352,10 +372,5 @@ public class RegistroHuesped extends JFrame {
 	        this.setLocation(x - xMouse, y - yMouse);
 }
 	    
-	    public void guardarHuesped() {
-	    	String fechaNac = ((JTextField)txtFechaN.getDateEditor().getUiComponent()).getText();
-	    	Huesped huesped = new Huesped(txtNombre.getText(), txtApellido.getText(), java.sql.Date.valueOf(fechaNac), txtNacionalidad.getSelectedItem().toString(),txtTelefono.getText(), Integer.valueOf(txtNreserva.getText()));
-	    	this.huespedController.guardar(huesped);
-	    }
-											
+
 }
